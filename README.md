@@ -1,6 +1,6 @@
 # Realtime Measurement of Extrudate Flow Temperatures and Width 
 
-> Originally published to https://github.com/jakeread/realtime-melt-flow-measurements on March 10th, 2025 
+> Originally published to https://github.com/jakeread/realtime-melt-flow-measurements in the wee hours of March 11th, 2025 
 
 > I hereby dedicate the contents of this disclosure to the public domain so that it may serve as prior art.  
 
@@ -26,6 +26,7 @@ However, thermal imaging devices are decreasing in cost, and the availability of
 
 ![v6](assets/2025-03-10_fusion-cap-01.png)  
 ![revo](assets/2025-03-10_fusion-cap-02.png)  
+> This design mounts a thermal imaging device (an MLX90614) alongside an E3D Revo hotend in an FFF extruder design. The device (and FOV, in blue) is positioned such that the nozzle tip is visible in frame. Other designs may use multiple cameras to enable measurements in any printing direction, or use other styles of imaging device. 
 
 In this scheme, we put a thermal imaging device nearby the nozzle, ideally so that the nozzle tip is visible in the device's field of view (FOV) although this is not a strict requirement. We then calibrate the camera's FOV with respect to the machine's motion system, making a projection between pixels in the camera's FOV and the 3D volume around the nozzle. The calibration gives us the equation for each ray eminating from each pixel in the imaging device. 
 
@@ -67,13 +68,15 @@ One of the main limits to wider adoption of additive components is their heterog
 
 It should be possible to take a series of frames, alongside concurrently captured motion data, to measure melt flow while also *scanning* the background of the frame, to image layers underneath the one currently being printed, or (for example) the adjacent tracks, further adding to a part's thermal history. 
 
-## Enumerations of Variations on the Theme 
+## Enumerations of Variations
 
 The strategy can be used with microbolometers, thermopile arrays, or any other form of thermal imaging device. Even single pixel devices can be used, although data would only be valid during particular directions of travel. Arrays of single pixel devices may be the route to developing a low cost, low fidelity version of this system. 
 
 Even if we cannot measure the melt flow directly exiting the nozzle (i.e. if we cannot position the camera so that the nozzle tip is in the FOV), we can still estimate flow temperatures at the nozzle by estimating polymer cooling rate from the position of the first measure-able pixel to the nozzle... that is to say, we can measure a point a few millimeters away from the nozzle tip, and use path history to understand how long ago the measured track section left the nozzle. 
 
 The system could be developed to suit non-planar printing, using more complex projections between the path history and the imaging device. 
+
+The system can of course be developed for pellet extruders as well as filament extruders. 
 
 A very simple implementation would simply find the 'hotspot' in the image and assume that is the most recently flowed chunk of material. This may be more computationally intensive, since it would require filtering the entire frame. The proposed solution effectively speeds up measurements by intelligently sampling the frame. 
 
