@@ -2,6 +2,8 @@
 
 > Originally published to https://github.com/jakeread/realtime-melt-flow-measurements in the wee hours of March 11th, 2025 
 
+> Mirrored to https://gitlab.cba.mit.edu/jakeread/realtime-melt-flow-measurements on March 13th, 2025 
+
 > I hereby dedicate the contents of this disclosure to the public domain so that it may serve as prior art.  
 
 When controlling melt flows in FFF or pellet-based additive manufacturing, the nozzle temperature is a main control variable. This is obvious: the extrudate temperature has a huge effect on the materials' viscosity. 
